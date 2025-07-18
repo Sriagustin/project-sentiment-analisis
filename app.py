@@ -102,7 +102,7 @@ st.set_page_config(
 # ========== SIDEBAR & APP STYLING ==========
 st.markdown("""
     <style>
-    /* ========== BACKGROUND UTAMA ========== */
+    /* ========== LATAR UTAMA ========== */
     .stApp {
         background-color: #f0f4f8 !important;
         color: #1A1A1A !important;
@@ -153,21 +153,21 @@ st.markdown("""
         border-color: white !important;
     }
 
-    /* ========== INPUT & FILE UPLOADER ========== */
+    /* ========== INPUT DAN FILE UPLOADER ========== */
     .stTextInput > div > div > input,
     .stFileUploader > div {
-        background-color: rgba(255, 255, 255, 0.5) !important;
+        background-color: rgba(255, 255, 255, 0.4) !important;
         color: #1A1A1A !important;
         border: 1px solid #1A1A1A !important;
     }
 
-    /* ========== HASIL PREDIKSI, KOMPONEN UTAMA ========== */
-    .stDataFrame, .stTable, .stAlert, .stMarkdown, .element-container {
-        background-color: rgba(255, 255, 255, 0.5) !important;
-        border: 1px solid #ccc !important;
-        border-radius: 10px;
-        padding: 10px;
+    /* ========== BERSIHKAN SEMUA KOTAK ========== */
+    .stDataFrame, .stTable, .stAlert, .stExpander, .element-container,
+    .stMarkdown, .stCard, .stCaption {
+        background: transparent !important;
         box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
     }
 
     /* ========== WARNA TEKS ========== */
