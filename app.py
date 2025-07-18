@@ -120,14 +120,17 @@ st.markdown("""
         padding: 0 !important;
     }
     .css-1lcbmhc.e1fqkh3o3 {  /* class sidebar menu item */
-        font-size: 13px !important;  /* ubah sesuai keinginan, misalnya 13px */
+        font-size: 10px !important;  /* ubah sesuai keinginan, misalnya 13px */
     }
     .css-1wvake5.e1fqkh3o3 {  /* class sidebar selected item */
-        font-size: 13px !important;
+        font-size: 10px !important;
 
        div[data-baseweb="select"] > div {
-        font-size: 13px !important;
+        font-size: 10px !important;
     } 
+
+    .nav-link {
+        font-size: 13px !important;
 
     /* ========== MENU NAVIGASI (OPTION MENU) ========== */
     ul.nav.nav-pills > li > a {
