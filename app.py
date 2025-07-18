@@ -15,12 +15,19 @@ from sklearn.metrics import confusion_matrix, accuracy_score, classification_rep
 from streamlit_option_menu import option_menu
 import plotly.graph_objects as go
 
-# Download NLTK data (silently)
 import nltk
+import os
 
-# Pastikan resource WordNet tersedia
-nltk.download('wordnet')
-nltk.download('omw-1.4')  # untuk lemmatization multibahasa (opsional tapi disarankan)
+# Folder khusus untuk menyimpan resource NLTK
+nltk_data_dir = os.path.join(os.getcwd(), 'nltk_data')
+os.makedirs(nltk_data_dir, exist_ok=True)
+nltk.data.path.append(nltk_data_dir)
+
+# Download stopwords dan resource WordNet jika belum ada
+nltk.download('stopwords', download_dir=nltk_data_dir)
+nltk.download('wordnet', download_dir=nltk_data_dir)
+nltk.download('omw-1.4', download_dir=nltk_data_dir)
+
 
 # ========== Utility Functions ==========
 
@@ -210,7 +217,7 @@ with st.sidebar:
             margin-bottom: 10px;
         ">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" width="50" style="margin: 0;"/>
-            <h2 style="color: #000000; font-weight: bold; margin: 0; font-size: 30px;">
+            <h2 style="color: #000000; font-weight: bold; margin: 0; font-size: 20px;">
                 Analyzing Mental Health<br>Sentiment on X App
             </h2>
         </div>
