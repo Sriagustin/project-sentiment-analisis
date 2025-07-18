@@ -8,3 +8,4 @@ sastrawi
 plotly
 scikit-learn
 wordcloud
+streamlit-option-menu
