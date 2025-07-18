@@ -100,12 +100,11 @@ st.set_page_config(
 )
 
 # ========== SIDEBAR & APP STYLING ==========
-
 st.markdown("""
     <style>
-    /* ========== BACKGROUND SOLID FORMAL ========== */
+    /* ========== BACKGROUND UTAMA ========== */
     .stApp {
-        background-color: #f0f4f8 !important; /* biru keabu-abuan yang lembut */
+        background-color: #f0f4f8 !important;
         color: #1A1A1A !important;
     }
 
@@ -115,36 +114,20 @@ st.markdown("""
         box-shadow: none !important;
         border: none !important;
     }
-    .stSidebarContent {
-        background: transparent !important;
-        padding: 0 !important;
-    }
-    .css-1lcbmhc.e1fqkh3o3 {  /* class sidebar menu item */
-        font-size: 10px !important;  
-    }
-    .css-1wvake5.e1fqkh3o3 {  /* class sidebar selected item */
-        font-size: 10px !important;
 
-       div[data-baseweb="select"] > div {
-        font-size: 10px !important;
-    } 
-
-    .nav-link {
-        font-size: 10px !important;
-
-    /* ========== MENU NAVIGASI (OPTION MENU) ========== */
+    /* ========== MENU NAVIGASI OPTION_MENU ========== */
     ul.nav.nav-pills > li > a {
         background-color: rgba(220, 230, 250, 0.3) !important;
         color: #1A1A1A !important;
-        font-size: 16px;
-        font-weight: bold;
+        font-size: 12px !important;
+        font-weight: 600;
         border-radius: 8px;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         transition: all 0.3s ease;
     }
 
     ul.nav.nav-pills > li > a.active {
-        background-color: rgba(100, 149, 237, 0.6) !important; /* cornflowerblue */
+        background-color: rgba(100, 149, 237, 0.6) !important;
         color: white !important;
     }
 
@@ -170,31 +153,25 @@ st.markdown("""
         border-color: white !important;
     }
 
-    /* ========== INPUT FIELD ========== */
-    .stTextInput > div > div > input {
-        background-color: rgba(255, 255, 255, 0.4) !important;
-        color: #1A1A1A !important;
-        border: 1px solid #1A1A1A !important;
-    }
-
+    /* ========== INPUT & FILE UPLOADER ========== */
+    .stTextInput > div > div > input,
     .stFileUploader > div {
-        background-color: rgba(255, 255, 255, 0.4) !important;
-        border: 1px solid #1A1A1A !important;
+        background-color: rgba(255, 255, 255, 0.5) !important;
         color: #1A1A1A !important;
+        border: 1px solid #1A1A1A !important;
     }
 
-    /* ========== KOMPONEN UTAMA ========== */
-    .st-cb, .stDataFrame, .stTable, .stAlert, .stExpander,
-    .stMarkdown, .stCard, .stCaption, .element-container {
-        background-color: transparent !important;
+    /* ========== HASIL PREDIKSI, KOMPONEN UTAMA ========== */
+    .stDataFrame, .stTable, .stAlert, .stMarkdown, .element-container {
+        background-color: rgba(255, 255, 255, 0.5) !important;
+        border: 1px solid #ccc !important;
+        border-radius: 10px;
+        padding: 10px;
         box-shadow: none !important;
-        border: none !important;
-        padding: 0 !important;
     }
 
-    /* ========== WARNA TEKS UTAMA ========== */
-    .stApp, .stMarkdown, .stText, .stHeader, .stSubheader,
-    .stCaption, .stDataFrame, .stTable, .stExpander, .stCard {
+    /* ========== WARNA TEKS ========== */
+    .stApp, .stMarkdown, .stText, .stHeader, .stSubheader {
         color: #1A1A1A !important;
     }
 
@@ -217,6 +194,7 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
 
 # ========== SIDEBAR HEADER ==========
 
