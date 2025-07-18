@@ -120,7 +120,7 @@ st.markdown("""
         padding: 0 !important;
     }
     .css-1lcbmhc.e1fqkh3o3 {  /* class sidebar menu item */
-        font-size: 10px !important;  /* ubah sesuai keinginan, misalnya 13px */
+        font-size: 10px !important;  
     }
     .css-1wvake5.e1fqkh3o3 {  /* class sidebar selected item */
         font-size: 10px !important;
@@ -130,13 +130,13 @@ st.markdown("""
     } 
 
     .nav-link {
-        font-size: 13px !important;
+        font-size: 10px !important;
 
     /* ========== MENU NAVIGASI (OPTION MENU) ========== */
     ul.nav.nav-pills > li > a {
         background-color: rgba(220, 230, 250, 0.3) !important;
         color: #1A1A1A !important;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
         border-radius: 8px;
         margin-bottom: 8px;
@@ -405,7 +405,7 @@ elif selected_tab == "Comparison Algorithm":
 
     models_dict = {
         "Naive Bayes": nb_model,
-        "Support Vector Machine": svm_model,
+        "SVM": svm_model,
         "XGBoost": xgb_model
     }
 
