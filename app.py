@@ -405,7 +405,7 @@ elif selected_tab == "Comparison Algorithm":
 
     models_dict = {
         "Naive Bayes": nb_model,
-        "SVM": svm_model,
+        "Support Vector Machine": svm_model,
         "XGBoost": xgb_model
     }
 
