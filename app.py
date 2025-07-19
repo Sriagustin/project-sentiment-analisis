@@ -199,8 +199,8 @@ div.stButton > button:hover {
 
 st.markdown("""
     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" width="130"/>
-        <h1 style="margin: 0; color: black; font-size: 70px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" width="100"/>
+        <h1 style="margin: 0; color: black; font-size: 60px;">
             🔍 Analyzing Mental Health Sentiment on X App
         </h1>
     </div>
@@ -288,7 +288,7 @@ if selected_tab == "Sentiment Analyze":
     with col1:
         st.markdown(f"""
         <div class='box'>
-            Jumlah Data Sebelum Preprocessing
+            Jumlah Data Mentah
             <span>{jumlah_sebelum}</span>
         </div>
         """, unsafe_allow_html=True)
@@ -296,7 +296,7 @@ if selected_tab == "Sentiment Analyze":
     with col2:
         st.markdown(f"""
         <div class='box'>
-            Jumlah Data Sesudah Preprocessing
+            Jumlah Data Preprocessing
             <span>{jumlah_sesudah}</span>
         </div>
         """, unsafe_allow_html=True)
