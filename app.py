@@ -15,19 +15,12 @@ from sklearn.metrics import confusion_matrix, accuracy_score, classification_rep
 from streamlit_option_menu import option_menu
 import plotly.graph_objects as go
 
+# Download NLTK data (silently)
 import nltk
-import os
 
-# Folder khusus untuk menyimpan resource NLTK
-nltk_data_dir = os.path.join(os.getcwd(), 'nltk_data')
-os.makedirs(nltk_data_dir, exist_ok=True)
-nltk.data.path.append(nltk_data_dir)
-
-# Download stopwords dan resource WordNet jika belum ada
-nltk.download('stopwords', download_dir=nltk_data_dir)
-nltk.download('wordnet', download_dir=nltk_data_dir)
-nltk.download('omw-1.4', download_dir=nltk_data_dir)
-
+# Pastikan resource WordNet tersedia
+nltk.download('wordnet')
+nltk.download('omw-1.4') 
 
 # ========== Utility Functions ==========
 
@@ -100,133 +93,149 @@ st.set_page_config(
 )
 
 # ========== SIDEBAR & APP STYLING ==========
+
 st.markdown("""
-    <style>
-    /* ========== LATAR UTAMA ========== */
-    .stApp {
-        background-color: #f0f4f8 !important;
-        color: #1A1A1A !important;
-    }
+<style>
+/* ========== BACKGROUND HALAMAN PUTIH ========== */
+.stApp {
+    background-color: #ffffff !important;
+    color: #1A1A1A !important;
+}
 
-    /* ========== SIDEBAR TRANSPARAN ELEGAN ========== */
-    [data-testid="stSidebar"], [data-testid="stSidebar"] > div:first-child {
-        background-color: rgba(255, 255, 255, 0.4) !important;
-        box-shadow: none !important;
-        border: none !important;
-    }
+/* ========== SIDEBAR NAVY ========== */
+[data-testid="stSidebar"], [data-testid="stSidebar"] > div:first-child {
+    background-color: #1f2a40 !important;
+    color: white !important;
+    box-shadow: none !important;
+    border: none !important;
+}
 
-    /* ========== MENU NAVIGASI OPTION_MENU ========== */
-    ul.nav.nav-pills > li > a {
-        background-color: rgba(220, 230, 250, 0.3) !important;
-        color: #1A1A1A !important;
-        font-size: 12px !important;
-        font-weight: 600;
-        border-radius: 8px;
-        margin-bottom: 6px;
-        transition: all 0.3s ease;
-    }
+/* ========== OPTION_MENU CUSTOM ========== */
+.css-1d391kg {  /* container option_menu */
+    background-color: transparent !important;
+    color: white !important;
+    border: none !important;
+}
 
-    ul.nav.nav-pills > li > a.active {
-        background-color: rgba(100, 149, 237, 0.6) !important;
-        color: white !important;
-    }
+.css-1d391kg ul {
+    background-color: transparent !important;
+}
 
-    ul.nav.nav-pills > li > a:hover {
-        background-color: rgba(173, 216, 230, 0.5) !important;
-        color: #1A1A1A !important;
-    }
+.css-1d391kg ul li a {
+    background-color: transparent !important;
+    color: #e0e6ed !important;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    padding: 10px;
+    transition: 0.3s ease;
+}
 
-    /* ========== TOMBOL ========== */
-    div.stButton > button {
-        background-color: rgba(110, 231, 183, 0.4) !important;
-        color: #1A1A1A !important;
-        border: 1px solid #1A1A1A !important;
-        font-weight: bold;
-        border-radius: 8px;
-        padding: 8px 16px;
-        transition: all 0.3s ease;
-    }
+/* Aktif saat diklik */
+.css-1d391kg ul li a[data-selected="true"] {
+    background-color: #f87171 !important;
+    color: white !important;
+}
 
-    div.stButton > button:hover {
-        background-color: rgba(110, 231, 183, 0.7) !important;
-        color: white !important;
-        border-color: white !important;
-    }
+/* Hover efek */
+.css-1d391kg ul li a:hover {
+    background-color: #334155 !important;
+    color: white !important;
+}
 
-    /* ========== INPUT DAN FILE UPLOADER ========== */
-    .stTextInput > div > div > input,
-    .stFileUploader > div {
-        background-color: rgba(255, 255, 255, 0.4) !important;
-        color: #1A1A1A !important;
-        border: 1px solid #1A1A1A !important;
-    }
+/* ========== TOMBOL ========== */
+div.stButton > button {
+    background-color: #f0f4f8 !important;
+    color: #1A1A1A !important;
+    border: 1px solid #1A1A1A !important;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
 
-    /* ========== BERSIHKAN SEMUA KOTAK ========== */
-    .stDataFrame, .stTable, .stAlert, .stExpander, .element-container,
-    .stMarkdown, .stCard, .stCaption {
-        background: transparent !important;
-        box-shadow: none !important;
-        border: none !important;
-        padding: 0 !important;
-    }
+div.stButton > button:hover {
+    background-color: #dbeafe !important;
+    color: #1A1A1A !important;
+    border-color: #1A1A1A !important;
+}
 
-    /* ========== WARNA TEKS ========== */
-    .stApp, .stMarkdown, .stText, .stHeader, .stSubheader {
-        color: #1A1A1A !important;
-    }
+/* ========== INPUT PUTIH ========== */
+.stTextInput > div > div > input,
+.stFileUploader > div {
+    background-color: #ffffff !important;
+    color: #1A1A1A !important;
+    border: 1px solid #ccc !important;
+}
 
-    /* ========== FOOTER ========== */
-    .footer {
-        background-color: #333 !important;
-        color: white !important;
-        text-align: center;
-        padding: 10px 0;
-        font-size: 14px;
-    }
+/* ========== TEKS UMUM ========== */
+.stApp, .stMarkdown, .stText, .stHeader, .stSubheader,
+.stCaption, .stDataFrame, .stTable, .stExpander, .stCard {
+    color: #1A1A1A !important;
+}
 
-    .footer a {
-        color: #00b6ff;
-        text-decoration: none;
-    }
+/* ========== FOOTER ========== */
+.footer {
+    background-color: #1f2a40 !important;
+    color: white !important;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+}
 
-    .footer a:hover {
-        text-decoration: underline;
-    }
-    </style>
+.footer a {
+    color: #60a5fa;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+</style>
 """, unsafe_allow_html=True)
 
 
 # ========== SIDEBAR HEADER ==========
 
+st.markdown("""
+    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" width="130"/>
+        <h1 style="margin: 0; color: black; font-size: 70px;">
+            🔍 Analyzing Mental Health Sentiment on X App
+        </h1>
+    </div>
+""", unsafe_allow_html=True)
+
 with st.sidebar:
-    st.markdown("""
-        <div style="
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 10px;
-        ">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" width="50" style="margin: 0;"/>
-            <h2 style="color: #000000; font-weight: bold; margin: 0; font-size: 20px;">
-                Analyzing Mental Health<br>Sentiment on X App
-            </h2>
-        </div>
-    """, unsafe_allow_html=True)
-with st.sidebar:
-    selected_tab = option_menu(
-        menu_title="Menu",
-        options=[
-            "Sentiment Analyze",
-            "Comparison Algorithm",
-            "Sentiment Prediction"
-        ],
+        selected_tab = option_menu(
+        "Menu", 
+        ["Sentiment Analyze", "Comparison Algorithm", "Sentiment Prediction"],
         icons=["bar-chart", "activity", "search"],
         menu_icon="cast",
         default_index=0,
-        orientation="vertical"
-        
+        styles={
+            "container": {"background-color": "#1f2a40"},
+            "icon": {"color": "white", "font-size": "18px"},
+            "nav-link": {
+                "color": "white !important",
+                "font-size": "16px",
+                "text-align": "left",
+                "margin": "0px",
+                "--hover-color": "#334155",
+            },
+            "nav-link-selected": {
+                "background-color": "#2b019e",
+                "color": "white !important",
+                "font-weight": "bold",
+            },
+            "menu-title": {
+                "color": "white",
+                "font-size": "24px",
+                "text-align": "",
+                "margin-bottom": "10px",
+            }
+        }
     )
-
 # ========== Load Data & Models ==========
 
 data = load_data()
@@ -251,6 +260,46 @@ y_test = test_data['Sentiment']
 if selected_tab == "Sentiment Analyze":
     st.subheader("Sentiment Analyze")
 
+    # ===== TAMBAHAN: KOTAK JUMLAH DATA =====
+    jumlah_sebelum = 18691
+    jumlah_sesudah = 12509
+
+    st.markdown("""
+        <style>
+        .box {
+            background-color: rgba(31, 45, 85, 0.9); 
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        .box span {
+            font-size: 34px;
+            display: block;
+            margin-top: 10px;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown(f"""
+        <div class='box'>
+            Jumlah Data Sebelum Preprocessing
+            <span>{jumlah_sebelum}</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown(f"""
+        <div class='box'>
+            Jumlah Data Sesudah Preprocessing
+            <span>{jumlah_sesudah}</span>
+        </div>
+        """, unsafe_allow_html=True)
     sentiment_counts = data['Sentiment'].value_counts().reset_index()
     sentiment_counts.columns = ['Sentiment', 'Count']
 
@@ -443,12 +492,12 @@ elif selected_tab == "Comparison Algorithm":
             with st.expander("Report"):
                 # Tampilkan classification report table
                 report_df = pd.DataFrame(report).transpose()
-                report_df = report_df.round(2)  # Membulatkan semua nilai numerik ke 2 desimal
+                report_df = report_df.round(2)  
                 st.dataframe(report_df)
 
 
                 # Overall accuracy & jumlah data uji
-                overall_acc = round(report["accuracy"], 2)  # dibulatkan ke 2 desimal
+                overall_acc = round(report["accuracy"], 2)  
                 n_test_data = len(y_true_str)
 
                 st.markdown(f"""
@@ -584,7 +633,7 @@ elif selected_tab == "Sentiment Prediction":
                 except Exception as e:
                     st.error(f"Prediction error: {e}")
 
-        st.markdown("### 📂 Predict Sentiment from File (.txt, one sentence per line)")
+        st.markdown("### 📂 Predict Sentiment from File")
         uploaded_file = st.file_uploader("Upload a text file:", type=["txt"])
 
         if uploaded_file is not None:
